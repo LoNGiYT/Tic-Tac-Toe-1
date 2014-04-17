@@ -37,44 +37,30 @@ void setup(){
 }
 
 void updateShiftRegister(int number)
-
 {
-
 digitalWrite(LATCH, LOW);
 shiftOut(DATA,CLOCK, LSBFIRST, number);
 digitalWrite(LATCH, HIGH);
-
 }
-
 void updateShiftRegister2(int number)
-
 {
-
 digitalWrite(LATCH2, LOW);
 shiftOut(DATA2,CLOCK2, LSBFIRST, number);
 digitalWrite(LATCH2, HIGH);
-
-}
-
- 
+} 
 
 void loop(){
   count = 1;
+  if(int i = 0; i < 9; i++){
   if(irrecv.decode(&results)){ 
     switch(results.value){
       /////////////////////////////////1 BUTTON//////////////
       case 0x010:
       if(count%2 == 1){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+      updateShiftRegister(2^0);
       }
     if(count%2 == 0){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+   updateShiftRegister(2^0);
     }
 count++;
       break;
@@ -83,16 +69,10 @@ count++;
     ////////////////////2 BUTTON/////////////////////
       case 0x810:
           if(count%2 == 1){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+    updateShiftRegister(2^1);
           }
     if(count%2 == 0){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+    updateShiftRegister2(00000000);
     }
 count++;
       break;
@@ -100,16 +80,10 @@ count++;
     ///////////////////////////////////////3 BUTTON/////////////////////
       case 0x410:
           if(count%2 == 1){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+   updateShiftRegister(00000000);
           }
     if(count%2 == 0){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+    updateShiftRegister2(00000000);
     }
 count++;
      break; 
@@ -117,32 +91,20 @@ count++;
     ///////////////////////////////////////4 BUTTON/////////////////////
       case 0xC10:
           if(count%2 == 1){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+    updateShiftRegister(00000000);
           }
     if(count%2 == 0){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+    updateShiftRegister2(00000000);
     }
 count++;
      break;
      ///////////////////////////////////////5 BUTTON/////////////////////
       case 0x210:
           if(count%2 == 1){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+    updateShiftRegister(00000000);
           }
     if(count%2 == 0){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+    updateShiftRegister2(00000000);
     }
 count++;
     
@@ -150,69 +112,46 @@ count++;
      ///////////////////////////////////////6 BUTTON/////////////////////
       case 0xA10:
           if(count%2 == 1){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+   updateShiftRegister(00000000);
           }
     if(count%2 == 0){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+    updateShiftRegister2(00000000);
     }
 count++;
      break;
     ///////////////////////////////////////7 BUTTON/////////////////////
       case 0x610:
           if(count%2 == 1){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+    updateShiftRegister(00000000);
           }
     if(count%2 == 0){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+    updateShiftRegister2(00000000);
     }
 count++;
      break;
      ///////////////////////////////////////8 BUTTON/////////////////////
       case 0xE10:
           if(count%2 == 1){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+  updateShiftRegister(00000000);
           }
     if(count%2 == 0){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+   updateShiftRegister2(00000000);
     }
 count++;
      break;
      ///////////////////////////////////////9 BUTTON/////////////////////
       case 0x110:      
           if(count%2 == 1){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+    updateShiftRegister(00000000);
           }
     if(count%2 == 0){
-    analogWrite(red,0);
-    analogWrite(green,150+brightness);
-    analogWrite(blue,150+brightness);
-    delay(500);
+    updateShiftRegister2(00000000);
     }
 count++;
      break;
     }
 
+  }
   }
 
 }
