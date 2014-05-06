@@ -1,30 +1,38 @@
-
 #include <IRremote.h>
-int recieverpin = 11;
-int red = 6;
-int green = 5;
-int blue = 9;
-int brightness = 0;
-int which;
-int power = 0;
-int switch1 = 0;
-#define DATA 9
+
+
+
+
+int receiverpin = 11;
+#define DATA 6
 #define LATCH 8
 #define CLOCK 10
-#define DATA2 6
-#define LATCH2 4
+#define DATA2 9
+#define LATCH2 7
 #define CLOCK2 5
+#define red 13
+#define blue 12
+
 int count;
+byte p = 0;
+byte r = 0;
+byte a = pow(2,0);
+byte b = pow(2,1);
+byte c = pow(2,2);
+byte d = pow(2,3);
+byte e = pow(2,4);
+byte f = pow(2,5);
+byte g = pow(2,6);
+byte h = pow(2,7);
 
-IRrecv irrecv(recieverpin);
 
+IRrecv irrecv(receiverpin);
 decode_results results;
 
 void setup(){
     irrecv.enableIRIn();
     pinMode(red,OUTPUT);
-    pinMode(green,OUTPUT);
-    pinMode(blue,OUTPUT); 
+    pinMode(blue,OUTPUT);
     pinMode(LATCH,OUTPUT);
     pinMode(CLOCK,OUTPUT);
     pinMode(DATA, OUTPUT);
@@ -32,6 +40,10 @@ void setup(){
     pinMode(CLOCK2,OUTPUT);
     pinMode(DATA2, OUTPUT);
     Serial.begin(9600);
+    updateShiftRegister(p);
+updateShiftRegister2(r);
+digitalWrite(red, LOW);
+digitalWrite(blue, LOW);
 
 
 }
@@ -49,110 +61,185 @@ shiftOut(DATA2,CLOCK2, LSBFIRST, number);
 digitalWrite(LATCH2, HIGH);
 } 
 
-void loop(){
-  count = 1;
-  if(int i = 0; i < 9; i++){
-  if(irrecv.decode(&results)){ 
-    switch(results.value){
+void loop(){ 
+
+if(irrecv.decode(&results)){
+   
+    switch(results.value){ 
+    
+    Serial.println(results.value);
+    
+
       /////////////////////////////////1 BUTTON//////////////
       case 0x010:
-      if(count%2 == 1){
-      updateShiftRegister(2^0);
+  count+=1;
+  Serial.println(count);
+  if(count%2 == 1){
+      p = p + a;
+      updateShiftRegister(p);
+    
       }
-    if(count%2 == 0){
-   updateShiftRegister(2^0);
+    else{
+      r = r + a;
+   updateShiftRegister2(r);
+   
     }
-count++;
+  
+   
+   
       break;
       
      
     ////////////////////2 BUTTON/////////////////////
       case 0x810:
+       count+=1;
+       Serial.println(count);
           if(count%2 == 1){
-    updateShiftRegister(2^1);
+            p = p + b;
+    updateShiftRegister(p);
+   
           }
-    if(count%2 == 0){
-    updateShiftRegister2(00000000);
+    else{
+      r = r + b;
+     updateShiftRegister2(r);
+ 
     }
-count++;
+
+
       break;
 
     ///////////////////////////////////////3 BUTTON/////////////////////
       case 0x410:
-          if(count%2 == 1){
-   updateShiftRegister(00000000);
-          }
-    if(count%2 == 0){
-    updateShiftRegister2(00000000);
+    count+=1;
+    Serial.println(count);
+      if(count%2 == 1){
+            p = p + c;
+     updateShiftRegister(p); 
+     
+     }
+    else{
+       r = r + c;
+    updateShiftRegister2(r);
+   
     }
-count++;
+
+
      break; 
 
     ///////////////////////////////////////4 BUTTON/////////////////////
       case 0xC10:
+count+=1;
+Serial.println(count);
           if(count%2 == 1){
-    updateShiftRegister(00000000);
+             p = p + d;
+     updateShiftRegister(p);
+ 
           }
-    if(count%2 == 0){
-    updateShiftRegister2(00000000);
+    else{
+       r = r + d;
+     updateShiftRegister2(r);
+  
     }
-count++;
+
+
      break;
      ///////////////////////////////////////5 BUTTON/////////////////////
       case 0x210:
+ count+=1;
+ Serial.println(count);
           if(count%2 == 1){
-    updateShiftRegister(00000000);
+            
+     digitalWrite(blue,HIGH);
+     
           }
-    if(count%2 == 0){
-    updateShiftRegister2(00000000);
+    else{
+     
+     digitalWrite(red,HIGH);
+     
     }
-count++;
+
+
     
      break;
-     ///////////////////////////////////////6 BUTTON/////////////////////
+     /////
+     //////////////////////////////////6 BUTTON/////////////////////
       case 0xA10:
+       count+=1;
+       Serial.println(count);
           if(count%2 == 1){
-   updateShiftRegister(00000000);
+             p = p + e;
+    updateShiftRegister(p);
+   
           }
-    if(count%2 == 0){
-    updateShiftRegister2(00000000);
+    else{
+       r = r + e;
+     updateShiftRegister2(r);
+     
     }
-count++;
+
+
      break;
     ///////////////////////////////////////7 BUTTON/////////////////////
       case 0x610:
+       count+=1;
+       Serial.println(count);
           if(count%2 == 1){
-    updateShiftRegister(00000000);
+             p = p + f;
+     updateShiftRegister(p);
+
           }
-    if(count%2 == 0){
-    updateShiftRegister2(00000000);
+    else{
+       r = r + f;
+     updateShiftRegister2(r);
+
     }
-count++;
+    
+
      break;
      ///////////////////////////////////////8 BUTTON/////////////////////
       case 0xE10:
+count+=1;
+Serial.println(count);
           if(count%2 == 1){
-  updateShiftRegister(00000000);
+             p = p + g;
+   updateShiftRegister(p);
+ 
           }
-    if(count%2 == 0){
-   updateShiftRegister2(00000000);
+    else{
+       r = r + g;
+    updateShiftRegister2(r);
+   
     }
-count++;
+
+
      break;
      ///////////////////////////////////////9 BUTTON/////////////////////
-      case 0x110:      
+      case 0x110:  
+ count+=1;
+ Serial.println(count);
           if(count%2 == 1){
-    updateShiftRegister(00000000);
+             p = p + h;
+     updateShiftRegister(p);
+
           }
-    if(count%2 == 0){
-    updateShiftRegister2(00000000);
+    else{
+       r = r + h;
+     updateShiftRegister2(r);
+     
     }
-count++;
+
+
      break;
+    
+
     }
-
+  //add in lnie of code to remove extra button presses
+  for(int z=0; z<2; z++) {
+    irrecv.resume();
+  
+delay(500);
   }
   }
-
 }
+
 
