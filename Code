@@ -282,7 +282,7 @@ Serial.println(count);
 updateShiftRegister(0);
      updateShiftRegister2(0);
      digitalWrite(red,LOW);
-     digitalWrite(blue,LOW);
+     digitalWrite(blue,LOW);   
     }
      break;
     
